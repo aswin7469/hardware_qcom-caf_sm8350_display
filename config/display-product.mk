@@ -181,7 +181,7 @@ endif
 SOONG_CONFIG_NAMESPACES += qtidisplay
 
 # Soong Keys
-SOONG_CONFIG_qtidisplay := drmpp headless llvmsa gralloc4 udfps default
+SOONG_CONFIG_qtidisplay := drmpp headless llvmsa gralloc4 gralloc_handle_has_reserved_size udfps default
 
 # Soong Values
 SOONG_CONFIG_qtidisplay_drmpp := true
@@ -190,6 +190,11 @@ SOONG_CONFIG_qtidisplay_llvmsa := false
 SOONG_CONFIG_qtidisplay_gralloc4 := true
 SOONG_CONFIG_qtidisplay_udfps := false
 SOONG_CONFIG_qtidisplay_default := true
+SOONG_CONFIG_qtidisplay_gralloc_handle_has_reserved_size := true
+
+ifeq ($(TARGET_GRALLOC_HANDLE_HAS_RESERVED_SIZE),false)
+    SOONG_CONFIG_qtidisplay_gralloc_handle_has_reserved_size := false
+endif
 
 ifeq ($(TARGET_IS_HEADLESS), true)
     PRODUCT_SOONG_NAMESPACES += $(DISPLAY_HAL_DIR)/qmaa
